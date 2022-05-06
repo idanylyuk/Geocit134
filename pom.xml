@@ -15,13 +15,13 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-	<groupId>com.softserveinc</groupId>
-	<artifactId>geo-citizen</artifactId>
-	<version>1.1.11</version>
+    <groupId>com.softserveinc</groupId>
+    <artifactId>geo-citizen</artifactId>
+    <version>1.1.11</version>
     <packaging>war</packaging>
 
-	<name>Geo Citizen</name>
-	<description>Demo project named as "Geo Citizen" for Soft Serve by Ch-58 group.</description>
+    <name>Geo Citizen</name>
+    <description>Demo project named as "Geo Citizen" for Soft Serve by Ch-58 group.</description>
 
     <properties>
         <project.fileName>citizen</project.fileName>
@@ -490,6 +490,20 @@
             <artifactId>spring-data-mongodb</artifactId>
             <version>1.10.7.RELEASE</version>
         </dependency>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>29.0-jre</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.1</version>
+      <scope>test</scope>
+    </dependency>
+
+
     </dependencies>
 
     <build>
@@ -578,13 +592,34 @@
                 </executions>
             </plugin>
         </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>3.7.0.1746</version>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.6</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
     </build>
 
-    <repositories>
+<repositories>
         <repository>
             <id>org.springframework.maven.milestone</id>
             <name>Spring Maven Milestone Repository</name>
-            <url>http://repo.spring.io/milestone</url>
+            <url>https://repo.spring.io/milestone</url>
         </repository>
         <repository>
             <id>public</id>
@@ -613,10 +648,10 @@
         <repository>
             <id>spring-milestone</id>
             <name>Spring Maven MILESTONE Repository</name>
-            <url>http://repo.spring.io/libs-milestone</url>
+            <url>https://repo.spring.io/libs-milestone</url>
         </repository>
 </repositories>
-<distributionManagement>
+<!--<distributionManagement>
     <repository>
       <id>nexus</id>
       <name>Releases</name>
@@ -627,5 +662,40 @@
       <name>Snapshot</name>
       <url>http://35.188.29.52:8081/repository/maven-snapshots</url>
     </snapshotRepository>
-  </distributionManagement>
+  </distributionManagement>-->
+
+  <!-- Sonar  -->
+
+
+  <profiles>
+    <profile>
+      <id>coverage</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>report</id>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>
