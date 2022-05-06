@@ -14,7 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
 
-@Ignore
+//@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { TestDatabaseConfig.class })
 @WebAppConfiguration
